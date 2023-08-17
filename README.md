@@ -28,7 +28,7 @@ NOSTRACHPRESS - ALGORITHMIC THINKING
 ├── source
 │   ├── pXX_name
 │   │   ├── ProblemDescription.md
-│   │   ├── main.c
+│   │   ├── filename.c
 ├── .gitignore
 ├── LICENSE
 └── README.md
@@ -56,6 +56,8 @@ NOSTRACHPRESS - ALGORITHMIC THINKING
 
 * 0.1
     * Initial Release
+* 0.2
+    * Add problem Food Lines
 
 ## License
 
