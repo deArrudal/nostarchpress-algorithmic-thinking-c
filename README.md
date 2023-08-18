@@ -58,6 +58,8 @@ NOSTRACHPRESS - ALGORITHMIC THINKING
     * Initial Release
 * 0.2
     * Add problem Food Lines
+* 0.3
+    * Add problem Unique Snowflakes
 
 ## License
 
