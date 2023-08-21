@@ -9,7 +9,7 @@ int shortest_line_index(int lines[], int n) {
     int shortest = 0;
     int k;
 
-    for (k = 1; k < n; k++) {
+    for(k = 1; k < n; k++) {
         if (lines[k] < lines[shortest]) {
             shortest = k;
         }
