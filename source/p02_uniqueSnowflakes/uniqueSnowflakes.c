@@ -4,8 +4,8 @@
 
 #define SIZE 100000
 
-// linked-list structure that stores a snowflake_node containing both a 
-// snowflake element and a pointer to the next one.
+/* linked-list structure storing a snowflake element and a pointer to
+    the next one. */
 typedef struct snowflake_node {
     int snowflake[6];
     struct snowflake_node *next;
@@ -74,6 +74,7 @@ void identify_identical(snowflake_node *snowflakes[]) {
     snowflake_node *node1, *node2;
     int i;
 
+    // loop through the buckets looking for identical elements.
     for(i = 0; i < SIZE; i++) {
         node1 = snowflakes[i];
 
@@ -97,10 +98,9 @@ void identify_identical(snowflake_node *snowflakes[]) {
 }
 
 int main(void) {
-    // snowflakes array is an array of buckets, where each bucket 
-    // contains a linked list.
+    // array of snowflakes' buckets, where each one contains a linked list.
     static snowflake_node *snowflakes[SIZE] = {NULL};
-    snowflake_node *snow; // snowflake.
+    snowflake_node *snow;
     int n, i, j, snowflake_code;
 
     scanf("%d", &n);

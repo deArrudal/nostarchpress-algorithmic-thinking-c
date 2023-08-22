@@ -6,16 +6,16 @@
 #define hashmask(n) (hashsize(n) - 1)
 
 #define NUM_BITS 17
+#define WORD_LENGTH 16
 
-// create a hash code based on entries.
+// create a hash code based on the word.
 unsigned long oaat(char *key, unsigned long len, unsigned long bits) {
     unsigned long hash, i;
-
-    // add elements of key to hash.  
+  
     for(hash = 0, i = 0; i < len; i++) {
-        hash += key[i];
-        hash += (hash << 10); // hash*(2^10)
-        hash ^= (hash >> 6); // hash/(2^6)
+        hash += key[i]; // add character to hash.
+        hash += (hash << 10); 
+        hash ^= (hash >> 6);
     }
 
     hash += (hash << 3);
@@ -25,7 +25,8 @@ unsigned long oaat(char *key, unsigned long len, unsigned long bits) {
     return hash & hashmask(bits);
 }
 
-/* based on https://stackoverflow.com/questions/16870485 */
+/* read input string of unknown length
+    https://stackoverflow.com/questions/16870485 */
 char *read_line(int size) {
     char *str;
     int ch;
@@ -37,7 +38,7 @@ char *read_line(int size) {
         exit(1);
     }
 
-    // loop til end of file or breakline.
+    // loop til end of file (EOF) or breakline ("\n").
     while((ch = getchar()) != EOF && (ch != '\n')) {
         str[len++] = ch;
         
@@ -57,21 +58,23 @@ char *read_line(int size) {
     return str;
 }
 
+// define linked list element.
 typedef struct word_node {
     char **word;
     struct word_node *next;
+
 } word_node;
 
-// takes a hash table and a word to find in the hash table.
+// search hash table for a specific word.
 int in_hash_table(word_node *hash_table[], char *find, unsigned find_len) {
     unsigned word_code;
     word_node *wordptr;
 
-    word_code = oaat(find, find_len, NUM_BITS);
+    word_code = oaat(find, find_len, NUM_BITS); // hash code.
 
     wordptr = hash_table[word_code];
-
     while(wordptr) {
+        // compare size and characters, return 1 if true.
         if((strlen(*(wordptr->word)) == find_len) &&
          (strncmp(*(wordptr->word), find, find_len) == 0)) {
             return 1;
@@ -81,4 +84,62 @@ int in_hash_table(word_node *hash_table[], char *find, unsigned find_len) {
     }
 
     return 0;
+}
+
+// check hash table for parts of the word.
+void identify_compound_words(char *words[], word_node *hash_table[], int total_words) {
+    int i, j;
+    unsigned len;
+
+    for(i = 0; i < total_words; i++) { 
+        len = strlen(words[i]);
+
+        for(j = 1; j < len; j++) {
+            // split word in combination pairs.
+            if((in_hash_table(hash_table, words[i], j)) &&
+             (in_hash_table(hash_table, &words[i][j], len - j))) {
+                printf("%s\n", words[i]);
+                break;
+            }
+        }
+    } 
+}
+
+int main(void) {
+    static char *words[1 << NUM_BITS] = {NULL};
+    static word_node *hash_table[1 << NUM_BITS] = {NULL};
+    int total = 0;
+    char *word;
+    word_node *wordptr;
+    unsigned length, word_code;
+
+
+    word = read_line(WORD_LENGTH);
+    
+    while(*word) {
+        words[total] = word;
+
+        wordptr = malloc(sizeof(word_node));
+        if(wordptr == NULL) {
+            fprintf(stderr, "malloc erro\n");
+            exit(1);
+        }
+
+        length = strlen(word);
+
+        word_code = oaat(word, length, NUM_BITS); // hash code.
+
+        // add to linked-list.
+        wordptr->word = &words[total];
+        wordptr->next = hash_table[word_code];
+        hash_table[word_code] = wordptr;
+
+        // read next line.
+        word = read_line(WORD_LENGTH);
+        total++;
+    }
+
+   identify_compound_words(words, hash_table, total);
+
+    return 0; 
 }
