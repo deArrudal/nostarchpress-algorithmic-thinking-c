@@ -36,7 +36,7 @@ NOSTRACHPRESS - ALGORITHMIC THINKING
 
 ### Executing program
 
-<b>To compile and execute a .c file: </b>
+**To compile and execute a .c file**:
 - Using a terminal, such as CMD or PowerShell.
     * Open a new terminal and move to ~/source folder.
     * Run the following command:
@@ -60,6 +60,8 @@ NOSTRACHPRESS - ALGORITHMIC THINKING
     * Add problem Food Lines
 * 0.3
     * Add problem Unique Snowflakes
+* 0.4
+    * Add problem Deleting a Letter
 
 ## License
 

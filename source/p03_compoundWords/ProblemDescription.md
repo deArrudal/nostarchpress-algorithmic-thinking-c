@@ -8,8 +8,7 @@ You are to find all the two-word compound words in a dictionary. A two-word comp
 
 ### Input
 
-The input is one string (word) per line, in alphabetical order. We’ll get at
-most 120,000 strings.
+The input is one string (word) per line, in alphabetical order. We’ll get at most 120,000 strings.
 
     a
     alien
@@ -25,8 +24,7 @@ most 120,000 strings.
 
 ### Output
 
-The problem requires us to output each compound word on its own line, in
-alphabetical order.
+The problem requires us to output each compound word on its own line, in alphabetical order.
 
     alien
     newborn
