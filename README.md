@@ -62,6 +62,14 @@ NOSTRACHPRESS - ALGORITHMIC THINKING
     * Add problem Unique Snowflakes
 * 0.4
     * Add problem Deleting a Letter
+* 0.5
+    * Add problem Halloween Haul
+* 0.6
+    * Add problem Descendant Distance
+* 0.7
+    * Add problem Burger Fervor
+* 0.8
+    * Add problem Money Grubbers info 
 
 ## License
 
